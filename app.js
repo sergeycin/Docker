@@ -1,20 +1,16 @@
 const express = require('express')
-const config = require('config')
-const mongose = require('mongoose')
-const path = require('path')
-const fileUpload = require("express-fileupload")
+
 const app = express()
-
+const path = require('path')
 let fs = require('fs');
-
-
-
 const PORT =  8000
 // Роуты для административной панели
 app.use(express.json({extended: true}))
-
+app.engine('ejs', require('ejs-mate'))
 
 app.use('/', require('./controllers/app.controller'))
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
 
 
 async function start(){
